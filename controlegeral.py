@@ -261,7 +261,7 @@ class ControleGeralApp(App):
         self.sangue = str(aspirante.sangue)
         self.nome_completo = str(aspirante.nome_completo)    
 
-    BOTAO_PRESSIONADO = ''
+    BOTAO_PRESSIONADO = StringProperty('')
 
     def consultar_licenca(self, chave_pesquisa):
         self.consulta_pben(chave_pesquisa)
@@ -269,10 +269,11 @@ class ControleGeralApp(App):
         info_licencas = busca_licenca(self.numero_atual, self.licencas)
         self.situacao_atual_licenca = info_licencas[0]
         self.ultima_alteracao_licenca = info_licencas[1]
+        print("Botão pressionado: " + self.BOTAO_PRESSIONADO)
 
 
     def atualiza_licenca(self, button_text):
-        
+        print("Botão pressionado: " + button_text)
         try:
             index = self.licencas.query('`Número Interno` == @self.numero_atual').index.tolist()[0]
             if button_text == 'Regresso':

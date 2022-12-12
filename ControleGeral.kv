@@ -576,10 +576,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                         ToggleButton:
                             group: 'licenca'
                             id: lic_btn
@@ -588,10 +587,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                         ToggleButton:
                             group: 'licenca'
                             id: st_btn
@@ -600,10 +598,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                         ToggleButton:
                             group: 'licenca'
                             text: 'Baixado'
@@ -612,10 +609,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                         ToggleButton:
                             group: 'licenca'
                             text: 'Disp. Domiciliar'
@@ -624,10 +620,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                         ToggleButton:
                             group: 'licenca'
                             text: 'LTS'
@@ -636,10 +631,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                         ToggleButton:
                             group: 'licenca'
                             text: 'HNMD'
@@ -648,10 +642,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                         ToggleButton:
                             group: 'licenca'
                             text: 'C/ Restrição'
@@ -660,10 +653,9 @@ MenuScreen
                             background_color: 0.7, 0.56, 0.4, 1
                             text_color: 0.77,0.77,0.77,1
                             bold: True
-                            on_press:
-                                app.BOTAO_PRESSIONADO = self.text
-                            on_release:
-                                app.BOTAO_PRESSIONADO = ''
+                            on_state:
+                                if self.state == 'down': app.BOTAO_PRESSIONADO = self.text
+                                else: app.BOTAO_PRESSIONADO = ''
                     Label:
                         size_hint: .125, 1
 
@@ -692,6 +684,7 @@ MenuScreen
                         text_validate_unfocus: False
                         on_text_validate:
                             app.consultar_licenca(self.text)
+                            print(app.BOTAO_PRESSIONADO)
                             app.atualiza_licenca(app.BOTAO_PRESSIONADO)
                             chave_pesquisa.text = ''
 
@@ -700,6 +693,8 @@ MenuScreen
                         pos_hint: {'center_x': .5, 'center_y': .5}
                         size_hint: 1, .6
                         on_press:
+                            print('botao apertado')
+                            print(app.BOTAO_PRESSIONADO)
                             app.consultar_licenca(chave_pesquisa.text)
                             app.atualiza_licenca(app.BOTAO_PRESSIONADO)
                             chave_pesquisa.text = ''
