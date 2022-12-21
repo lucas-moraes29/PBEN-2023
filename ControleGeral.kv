@@ -684,7 +684,6 @@ MenuScreen
                         text_validate_unfocus: False
                         on_text_validate:
                             app.consultar_licenca(self.text)
-                            print(app.BOTAO_PRESSIONADO)
                             app.atualiza_licenca(app.BOTAO_PRESSIONADO)
                             chave_pesquisa.text = ''
 
@@ -693,8 +692,6 @@ MenuScreen
                         pos_hint: {'center_x': .5, 'center_y': .5}
                         size_hint: 1, .6
                         on_press:
-                            print('botao apertado')
-                            print(app.BOTAO_PRESSIONADO)
                             app.consultar_licenca(chave_pesquisa.text)
                             app.atualiza_licenca(app.BOTAO_PRESSIONADO)
                             chave_pesquisa.text = ''
@@ -1432,10 +1429,88 @@ MenuScreen
             Label:
                 size_hint: .1, 1
 
+
             #Interface Parte Alta
             BoxLayout:
                 size_hint: .8, 1
                 orientation: "vertical"
+
+            #Atualiza Parte Alta
+                BoxLayout:
+                    size_hint: 1, .1
+                    Label:
+                        size_hint: .125, 1
+                    Label:
+                        size_hint: .1, 1
+                        text: 'Novo status:'
+                        color: 0.18, 0.28, 0.40, 1
+                        bold: True
+                    GridLayout:
+                        size_hint: .65, 1
+                        spacing: "5dp"
+                        rows: 2
+                        ToggleButton:
+                            group: 'parte alta'
+                            text: 'Parte Alta'
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            background_color: 0.7, 0.56, 0.4, 1
+                            text_color: 0.77,0.77,0.77,1
+                            bold: True
+                            on_state:
+                                if self.state == 'down': app.botao_parte_alta = self.text
+                                else: app.botao_parte_alta = ''
+                        ToggleButton:
+                            group: 'parte alta'
+                            text: 'TFM'
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            background_color: 0.7, 0.56, 0.4, 1
+                            text_color: 0.77,0.77,0.77,1
+                            bold: True
+                            on_state:
+                                if self.state == 'down': app.botao_parte_alta = self.text
+                                else: app.botao_parte_alta = ''
+                        ToggleButton:
+                            group: 'parte alta'
+                            text: 'Sala de Estado'
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            background_color: 0.7, 0.56, 0.4, 1
+                            text_color: 0.77,0.77,0.77,1
+                            bold: True
+                            on_state:
+                                if self.state == 'down': app.botao_parte_alta = self.text
+                                else: app.botao_parte_alta = ''
+                        ToggleButton:
+                            group: 'parte alta'
+                            text: 'Enfermaria'
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            background_color: 0.7, 0.56, 0.4, 1
+                            text_color: 0.77,0.77,0.77,1
+                            bold: True
+                            on_state:
+                                if self.state == 'down': app.botao_parte_alta = self.text
+                                else: app.botao_parte_alta = ''
+                        ToggleButton:
+                            group: 'parte alta'
+                            text: 'Banco'
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            background_color: 0.7, 0.56, 0.4, 1
+                            text_color: 0.77,0.77,0.77,1
+                            bold: True
+                            on_state:
+                                if self.state == 'down': app.botao_parte_alta = self.text
+                                else: app.botao_parte_alta = ''
+                        ToggleButton:
+                            group: 'parte alta'
+                            text: 'Biblioteca'
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            background_color: 0.7, 0.56, 0.4, 1
+                            text_color: 0.77,0.77,0.77,1
+                            bold: True
+                            on_state:
+                                if self.state == 'down': app.botao_parte_alta = self.text
+                                else: app.botao_parte_alta = ''
+                    Label:
+                        size_hint: .125, 1
 
                 #Consulta Parte Alta
                 BoxLayout:
@@ -1457,71 +1532,29 @@ MenuScreen
                         pos_hint: {'center_x': .5, 'center_y': .5}
                         size_hint: 1, .6
                         multiline: False
-                        on_text_validate: app.input_texto_partealta(self)
+                        text_validate_unfocus: False
+                        on_text_validate:
+                            app.consultar_partealta(chave_pesquisa.text)
+                            app.atualiza_partealta(app.botao_parte_alta)
+                            chave_pesquisa.text = ''
+
+                    Button:
+                        text: 'Selecionar'
+                        pos_hint: {'center_x': .5, 'center_y': .5}
+                        size_hint: 1, .6
+                        on_press:
+                            app.consultar_partealta(chave_pesquisa.text)
+                            app.atualiza_partealta(app.botao_parte_alta)
+                            chave_pesquisa.text = ''
+                        background_color: 0.7, 0.56, 0.4, 1
+                        text_color: 0.77,0.77,0.77,1
+                        bold: True
+
                     Label:
                         size_hint: 1,.3
 
                 Selecionado_ParteAlta:
                     size_hint: 1, .05
-
-                #Atualiza Parte Alta
-                BoxLayout:
-                    size_hint: 1, .1
-                    Label:
-                        size_hint: .125, 1
-                    Label:
-                        size_hint: .1, 1
-                        text: 'Novo status:'
-                        color: 0.18, 0.28, 0.40, 1
-                        bold: True
-                    GridLayout:
-                        size_hint: .65, 1
-                        spacing: "5dp"
-                        rows: 2
-                        Button:
-                            text: 'Parte Alta'
-                            pos_hint: {'center_x': .5, 'center_y': .5}
-                            on_press: app.atualiza_partealta(self)
-                            background_color: 0.7, 0.56, 0.4, 1
-                            text_color: 0.77,0.77,0.77,1
-                            bold: True
-                        Button:
-                            text: 'TFM'
-                            pos_hint: {'center_x': .5, 'center_y': .5}
-                            on_press: app.atualiza_partealta(self)
-                            background_color: 0.7, 0.56, 0.4, 1
-                            text_color: 0.77,0.77,0.77,1
-                            bold: True
-                        Button:
-                            text: 'Sala de Estado'
-                            pos_hint: {'center_x': .5, 'center_y': .5}
-                            on_press: app.atualiza_partealta(self)
-                            background_color: 0.7, 0.56, 0.4, 1
-                            text_color: 0.77,0.77,0.77,1
-                            bold: True
-                        Button:
-                            text: 'Enfermaria'
-                            pos_hint: {'center_x': .5, 'center_y': .5}
-                            on_press: app.atualiza_partealta(self)
-                            background_color: 0.7, 0.56, 0.4, 1
-                            text_color: 0.77,0.77,0.77,1
-                            bold: True
-                        Button:
-                            text: 'Banco'
-                            pos_hint: {'center_x': .5, 'center_y': .5}
-                            on_press: app.atualiza_partealta(self)
-                            background_color: 0.7, 0.56, 0.4, 1
-                            text_color: 0.77,0.77,0.77,1
-                            bold: True
-                        Button:
-                            text: 'Biblioteca'
-                            pos_hint: {'center_x': .5, 'center_y': .5}
-                            on_press: app.atualiza_partealta(self)
-                            background_color: 0.7, 0.56, 0.4, 1
-                            text_color: 0.77,0.77,0.77,1
-                            bold: True
-                    Label:
-                        size_hint: .125, 1
 
                 Informacoes_ParteAlta:
                     size_hint: 1, .1

@@ -565,40 +565,27 @@ class ControleGeralApp(App):
         self.chaves_claviculario = str(dicionario['Claviculário'])
         self.chaves_fora = str(len(self.chaves.Atual) - dicionario['Claviculário'])
 
-    def input_texto_partealta(self,textbox):
-        aspirante = busca_aspirante(self.aspirantes,textbox.text)
-        self.numero_atual = str(aspirante.numero_interno_atual)
-        self.nome_guerra = str(aspirante.nome_guerra)
-        #Alterar datas
-        self.numero_interno_2021 = str(aspirante.numero_interno_2021)
-        self.numero_interno_2020 = str(aspirante.numero_interno_2020)
-        self.numero_interno_2019 = str(aspirante.numero_interno_2019)
-        self.numero_interno_2018 = str(aspirante.numero_interno_2018)
-        self.nascimento = str(aspirante.data_nascimento)
-        self.celular = str(aspirante.celular)
-        self.telefone = str(aspirante.telefone)
-        self.email = str(aspirante.email)
-        self.companhia = str(aspirante.companhia)
-        self.pelotao = str(aspirante.pelotao)
-        self.camarote = str(aspirante.alojamento)
-        self.quarto = str(aspirante.quarto_habilitacao)
-        self.nip = str(aspirante.nip)
-        self.sangue = str(aspirante.sangue)
-        self.nome_completo = str(aspirante.nome_completo)
+    def consultar_partealta(self,chave_pesquisa):
+        self.consulta_pben(chave_pesquisa)
         
         info_partealta = busca_licenca(self.numero_atual, self.partealta)
         self.situacao_atual_partealta = info_partealta[0]
         self.ultima_alteracao_partealta = info_partealta[1]
 
-    def atualiza_partealta(self,button):
-        try:
-            index = self.partealta.query('`Número Interno` == @self.numero_atual').index.tolist()[0]
-            self.partealta['Situação'][index] = button.text
-            self.partealta['Última Alteração'][index] = datetime.now().strftime('%d/%m/%Y %H:%M')
-            self.partealta_salvou = 'Alterações pendentes'
-        except:
-            self.numero_atual = 'Selecione um aspirante'
-            self.nome_guerra = ''
+    botao_parte_alta = StringProperty('')
+
+    def atualiza_partealta(self, button_text):
+        if button_text == '':
+            pass
+        else:
+            try:
+                index = self.partealta.query('`Número Interno` == @self.numero_atual').index.tolist()[0]
+                self.partealta['Situação'][index] = button_text
+                self.partealta['Última Alteração'][index] = datetime.now().strftime('%d/%m/%Y %H:%M')
+                self.partealta_salvou = 'Alterações pendentes'
+            except:
+                self.numero_atual = 'Selecione um aspirante'
+                self.nome_guerra = ''
 
         info_partealta = busca_licenca(self.numero_atual, self.partealta)
         self.situacao_atual_partealta = info_partealta[0]
