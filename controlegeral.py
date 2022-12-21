@@ -273,18 +273,21 @@ class ControleGeralApp(App):
 
 
     def atualiza_licenca(self, button_text):
-        print("Botão pressionado: " + button_text)
-        try:
-            index = self.licencas.query('`Número Interno` == @self.numero_atual').index.tolist()[0]
-            if button_text == 'Regresso':
-                self.licencas['Situação'][index] = 'A bordo'
-            else:
-                self.licencas['Situação'][index] = button_text
-            self.licencas['Última Alteração'][index] = datetime.now().strftime('%d/%m/%Y %H:%M')
-            self.licenca_salvou = 'Alterações pendentes'
-        except:
-            self.numero_atual = 'Selecione um aspirante'
-            self.nome_guerra = ''
+        #print("Botão pressionado: " + button_text)
+        if button_text == "":
+            pass
+        else:
+            try:
+                index = self.licencas.query('`Número Interno` == @self.numero_atual').index.tolist()[0]
+                if button_text == 'Regresso':
+                    self.licencas['Situação'][index] = 'A bordo'
+                else:
+                    self.licencas['Situação'][index] = button_text
+                self.licencas['Última Alteração'][index] = datetime.now().strftime('%d/%m/%Y %H:%M')
+                self.licenca_salvou = 'Alterações pendentes'
+            except:
+                self.numero_atual = 'Selecione um aspirante'
+                self.nome_guerra = ''
 
         info_licencas = busca_licenca(self.numero_atual, self.licencas)
         self.situacao_atual_licenca = info_licencas[0]
